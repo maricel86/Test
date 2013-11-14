@@ -32,8 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvReader">
+      <HintPath>..\packages\CsvTools.1.0.9\lib\CsvReader.dll</HintPath>
+    </Reference>
     <Reference Include="MathNet.Numerics">
       <HintPath>..\packages\MathNet.Numerics.2.6.2\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics.Data.Matlab">
+      <HintPath>..\packages\MathNet.Numerics.Data.Matlab.1.1.0\lib\net40\MathNet.Numerics.Data.Matlab.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics.Data.Text">
+      <HintPath>..\packages\MathNet.Numerics.Data.Text.1.1.0\lib\net40\MathNet.Numerics.Data.Text.dll</HintPath>
     </Reference>
     <Reference Include="MathNet.Numerics.IO">
       <HintPath>..\packages\MathNet.Numerics.2.6.2\lib\net40\MathNet.Numerics.IO.dll</HintPath>
