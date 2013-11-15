@@ -22,7 +22,7 @@ namespace GitProjectTest
 
 
 
-                DataTable dt = DataTable.New.ReadCsv(@"ata.csv");
+                DataTable dt = DataTable.New.ReadCsv(@"Data\data.csv");
 
                 var mat = new DenseMatrix(dt.Rows.Count(), dt.ColumnNames.Count());
 
