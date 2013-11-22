@@ -9,7 +9,6 @@ using MathNet.Numerics.LinearAlgebra.Generic;
 using MathNet.Numerics.LinearAlgebra.Double.IO;
 using System.IO;
 using MathNet.Numerics.LinearAlgebra.IO;
-using DataAccess;
 
 
 namespace GitProjectTest
@@ -20,29 +19,18 @@ namespace GitProjectTest
         {
             {
 
+                var mat = DenseMatrix.OfArray( CsvHelper.CsvToMatrix(@"Data\data.csv"));
 
 
-                DataTable dt = DataTable.New.ReadCsv(@"Data\data.csv");
-
-                var mat = new DenseMatrix(dt.Rows.Count(), dt.ColumnNames.Count());
+                Console.WriteLine(mat.ToString(20,10));
 
 
-
-
-                foreach (var item in dt.Rows)
-                {
-                    //var row = item.Values.ToArray<double>();
-                }
-
-
-
-
-
-
-                var matrix = DenseMatrix.Identity(4);
-                Console.WriteLine(matrix);
+                //var matrix = DenseMatrix.Identity(4);
+                //Console.WriteLine(matrix);
                 Console.ReadKey();
             }
         }
+
+       
     }
 }
