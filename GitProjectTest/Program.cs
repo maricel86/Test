@@ -1,36 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using MathNet.Numerics.LinearAlgebra.Double;
-using MathNet.Numerics.LinearAlgebra.Generic;
-using MathNet.Numerics.LinearAlgebra.Double.IO;
-using System.IO;
-using MathNet.Numerics.LinearAlgebra.IO;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
+using ILNumerics;
+using ILNumerics.Drawing;
+using ILNumerics.Drawing.Plotting;
 
 
 namespace GitProjectTest
 {
     class Program
     {
+
         static void Main(string[] args)
         {
+            var identityMatrix = ILMath.eye(5, 5);
+            Console.WriteLine("Identity Matrix for 5 is :");
+            Console.WriteLine(identityMatrix);
+            
+
+            ILArray<double> matrix;
+            using (var matRead = new ILMatFile(@"Data\data.mat"))
             {
-
-                var mat = DenseMatrix.OfArray( CsvHelper.CsvToMatrix(@"Data\data.csv"));
-
-
-                Console.WriteLine(mat.ToString(20,10));
-
-
-                //var matrix = DenseMatrix.Identity(4);
-                //Console.WriteLine(matrix);
-                Console.ReadKey();
+                matrix = matRead.GetArray<double>(0);
             }
+            
+            var form = new DisplayForm();
+            form.SetData(matrix.Concat(ILMath.zeros(matrix.Size[0], 1), 1).T);
+            
+            Application.Run(form); 
+
+            Console.ReadKey();
+
         }
 
-       
+
     }
 }
