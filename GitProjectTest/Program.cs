@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Forms;
 using ILNumerics;
 
 
@@ -36,20 +35,11 @@ namespace GitProjectTest
 
 
             var hypothesis = ILMath.multiply(x, theta);
+            var error = hypothesis - y;
+            var squareError = ILMath.pow(error, ILMath.array((double)2));
+            var cost = (1.0 / (2.0 * m)) * ILMath.sum(squareError);
 
-            var c = (hypothesis - y);
-
-
-
-            //Console.WriteLine(ILMath.pow(c, c));
-
-             
-
-
-            //Console.WriteLine(theta);
-
-            //Console.WriteLine(x*theta);
-
+            Console.WriteLine(cost);
 
 
             Console.ReadKey();
