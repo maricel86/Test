@@ -23,6 +23,8 @@ namespace GitProjectTest
 
         public void SetData(ILArray<double> data, string xAxis = "", string yAxis = "")
         {
+            panel.Scene = null;
+
             var scene = new ILScene();
 
 

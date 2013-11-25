@@ -27,27 +27,44 @@ namespace GitProjectTest
                 matrix = matRead.GetArray<double>(0);
             }
 
-
             Console.WriteLine("Program paused. close plot window to continue.");
 
-            PlotData(matrix[ILMath.full, 0], matrix[ILMath.full, 1]);
-
-
+            var x = matrix[ILMath.full, 0];
+            var y = matrix[ILMath.full, 1];
+            PlotData(x, y);
 
 
             //=================== Part 3: Gradient descent ===================
             Console.WriteLine("Running Gradient Descent ...");
 
+
             var m = matrix.Size[0];
-            var x = ILMath.ones(m, 1).Concat(matrix[ILMath.full, 0], 1);
-            var y = matrix[ILMath.full, 1];
             var theta = ILMath.zeros(2, 1);
+            x = ILMath.ones(m, 1).Concat(matrix[ILMath.full, 0], 1);
+            y = matrix[ILMath.full, 1];
 
             Console.WriteLine(ComputeCost(x, y, theta));
 
+            double alpha = 0.01;
+            int iterations = 1500;
+
+            theta = ILMath.zeros(2, 1);
+            x = ILMath.ones(m, 1).Concat(matrix[ILMath.full, 0], 1);
+            y = matrix[ILMath.full, 1];
+            theta = GradientDescent(x, y, theta, alpha, iterations);
+
+
+
+            Console.WriteLine("Theta found by gradient descent: ");
+            Console.WriteLine(string.Format("\n Theta(0)={0}, \n Theta(1)={1}", theta[0], theta[1]));
+
+
+            x = ILMath.ones(m, 1).Concat(matrix[ILMath.full, 0], 1);
+            y = ILMath.multiply(x, theta);
+
+            //PlotData(matrix[ILMath.full, 0], y);
 
             Console.ReadKey();
-
         }
 
 
@@ -77,7 +94,6 @@ namespace GitProjectTest
             var form = new Display();
             form.SetData(vector.T, "Population of City in 10,000s", "Profit in $10,000s");
             Application.Run(form);
-
             // ===========================================
         }
 
@@ -94,8 +110,29 @@ namespace GitProjectTest
             return (1.0 / (2.0 * count)) * ILMath.sum(squareError);
 
             // ===========================================
+        }
 
 
+        public static ILArray<double> GradientDescent(ILArray<double> x, ILArray<double> y, ILArray<double> theta, double alpha, int iterations)
+        {
+            // ====================== YOUR CODE HERE ======================
+            // Instructions: Perform a single gradient step on the parameter vector
+            //               theta. 
+            //
+            // Hint: While debugging, it can be useful to print out the values
+            //       of the cost function (computeCost) and gradient here.
+            //
+
+            var count = x.Size[0];
+
+            for (int i = 0; i < iterations; i++)
+            {
+                theta = theta - alpha * (1.0 / count) * (ILMath.multiply(x.T, (ILMath.multiply(x, theta) - y)));
+            }
+
+            return theta;
+
+            //============================================================
         }
     }
 }
