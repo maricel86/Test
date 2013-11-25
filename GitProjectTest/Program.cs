@@ -18,6 +18,7 @@ namespace GitProjectTest
             Console.ReadKey();
 
 
+
             //======================= Part 2: Plotting =======================
             Console.WriteLine("Plotting Data ...");
             ILArray<double> matrix;
@@ -73,7 +74,7 @@ namespace GitProjectTest
             var count = x.Size[0];
             var vector = x.Concat(y, 1).Concat(ILMath.zeros(count, 1), 1);
 
-            var form = new DisplayForm();
+            var form = new Display();
             form.SetData(vector.T, "Population of City in 10,000s", "Profit in $10,000s");
             Application.Run(form);
 
@@ -93,6 +94,8 @@ namespace GitProjectTest
             return (1.0 / (2.0 * count)) * ILMath.sum(squareError);
 
             // ===========================================
+
+
         }
     }
 }
