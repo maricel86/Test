@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 using ILNumerics;
+using Accord.Math;
+using Accord.Math.Optimization;
 
 
 namespace GitProjectTest
@@ -10,6 +12,13 @@ namespace GitProjectTest
 
         static void Main(string[] args)
         {
+
+
+            //BroydenFletcherGoldfarbShanno bfgs = new BroydenFletcherGoldfarbShanno(2, );
+
+
+
+
             // ==================== Part 1: Basic Function ====================
             Console.WriteLine("Running warmUpExercise ... ");
             Console.WriteLine("5x5 Identity Matrix: ");
@@ -93,7 +102,9 @@ namespace GitProjectTest
 
             var form = new Display();
             form.SetData(vector.T, "Population of City in 10,000s", "Profit in $10,000s");
-            Application.Run(form);
+
+            form.Show();
+
             // ===========================================
         }
 
@@ -103,9 +114,8 @@ namespace GitProjectTest
             //Instructions: computes the cost using theta as the
             //              parameter for linear regression to fit the data points in x and y
 
-            var count = x.Size[0];
-            var hypothesis = ILMath.multiply(x, theta);
-            var error = hypothesis - y;
+            var count = x.Size[0];            
+            var error = ILMath.multiply(x, theta) - y;
             var squareError = ILMath.pow(error, ILMath.array((double)2));
             return (1.0 / (2.0 * count)) * ILMath.sum(squareError);
 
